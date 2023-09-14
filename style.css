@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 10px;
+}
+
+body {
+    font-family: 'Oswald', sans-serif;
+    background-color: #2c3e50; 
+}
+
+header {
+    margin-top: 20px;
+}
+
+header .container{
+    display: flex;
+    justify-content: center;
+}
+
+header .container button {
+    font-size: 4rem;
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: #00b894;
+    color: #393e46;
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+#win-text {
+    margin-top: 50px;
+}
+
+#win-text p {
+    font-size: 2.8rem;
+    color: #00b894;
+    text-align: center;
+    font-weight: bold;
+}
+
+section {
+    margin-top: 50px;
+}
+
+section .container {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+}
+
+section .container h2 {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 10px;
+    color: #00b894;
+}
+
+section .container img {
+    width: 200px;
+}
+
+footer {
+    margin-top: 200px;
+}
+
+footer .container p {
+    margin-top: 10px;
+    font-size: 2.4rem;
+    color: #dfe6e9;
+    text-align: center;
+}
+
+@media (max-width: 512px) {
+    section .container {
+        flex-direction: column;
+        align-items: center;
+        gap: 50px;
+    }
+
+    section .container img {
+        width: 150px;
+    }
+
+    footer {
+        margin-top: 100px;
+        margin-bottom: 20px;
+    }
+}

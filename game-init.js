@@ -14,7 +14,7 @@ class Initialize {
             e.preventDefault();
 
             //Player count detection : 
-            if (this.numberControl(parseInt(input.value))) {
+            if (this.numberControl(input.value)) {
                 this.playerCount = parseInt(input.value);
                 input.value = "";
 
@@ -103,7 +103,7 @@ class Initialize {
     }
 
     numberControl(num) {
-        if (num >= 2 && num <= 6)
+        if (num >= "2" && num <= "6")
             return true
 
         return false;

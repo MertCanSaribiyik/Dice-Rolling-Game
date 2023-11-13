@@ -3,6 +3,7 @@ export default class Game {
     temp = [];
     winTxt = document.getElementById("win-text");
     shakeBtn = document.querySelector(".game header button");
+    value = true;
 
     constructor(playerNames) {
         for (let i = 0; i < playerNames.length; i++) {
@@ -37,28 +38,33 @@ export default class Game {
     }
 
     shake() {
+
         this.shakeBtn.addEventListener("click", () => {
-            if (this.winTxt.textContent === "Draw !") {
-                this.clear();
+            if (this.value) {
+                this.value = false;
+
+                if (this.winTxt.textContent === "Draw !") {
+                    this.clear();
+                }
+
+                else if (this.winTxt.textContent.includes("win")) {
+                    this.clear();
+                    this.players = this.temp;
+                }
+
+                //Dice rolling : 
+                this.diceRolling();
+
+                setTimeout(() => {
+                    //Finding winning players : 
+                    this.findingWinningPlayers();
+
+                    this.printWinningPlayers();
+
+                }, 400);
             }
+        });
 
-            else if (this.winTxt.textContent.includes("win")) {
-                this.clear();
-                this.players = this.temp;
-            }
-
-            //Dice rolling : 
-            this.diceRolling();
-
-            setTimeout(() => {
-                //Finding winning players : 
-                this.findingWinningPlayers();
-
-                this.printWinningPlayers();
-
-            }, 400);
-
-        })
     }
 
     diceRolling() {
@@ -70,6 +76,7 @@ export default class Game {
                 item.url = `./images/dice${item.score}.png`;
                 item.div.lastElementChild.setAttribute("src", item.url);
                 item.div.lastElementChild.classList.remove("dice-anim");
+                this.value = true;
             }, 400);
 
         });
@@ -102,7 +109,7 @@ export default class Game {
         });
 
         if (this.players.length === 1) {
-            this.winTxt.textContent = this.players[0].name + " win !";
+            this.winTxt.textContent = this.players[0].name + " won !";
         }
 
         else {

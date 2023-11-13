@@ -1,5 +1,6 @@
 export default class Game {
     players = [];
+    losingPlayers = [];
     temp = [];
     winTxt = document.getElementById("win-text");
     shakeBtn = document.querySelector(".game header button");
@@ -43,13 +44,22 @@ export default class Game {
             if (this.value) {
                 this.value = false;
 
-                if (this.winTxt.textContent === "Draw !") {
-                    this.clear();
+                if(this.winTxt.textContent.includes("Draw")) {
+                    this.losingPlayers.forEach((item) => {
+                        item.div.classList.add("display-none");
+                    })
+
+                    this.clear(this.players);
+                    this.clear(this.losingPlayers);
                 }
 
-                else if (this.winTxt.textContent.includes("win")) {
-                    this.clear();
-                    this.players = this.temp;
+                else if (this.winTxt.textContent.includes("won")) {
+                    this.clear(this.players);
+                    this.clear(this.losingPlayers);
+
+                    this.players.forEach((item) => {
+                        item.div.classList.remove("display-none");  
+                    })
                 }
 
                 //Dice rolling : 
@@ -102,6 +112,7 @@ export default class Game {
         this.winTxt.classList.remove("display-none");
 
         //We assign the winning players to a object arrays :
+        this.losingPlayers = this.players.filter(player => player.win === false);
         this.players = this.players.filter(player => player.win === true);
 
         this.players.forEach((item) => {
@@ -110,6 +121,7 @@ export default class Game {
 
         if (this.players.length === 1) {
             this.winTxt.textContent = this.players[0].name + " won !";
+            this.players = this.temp;
         }
 
         else {
@@ -117,8 +129,8 @@ export default class Game {
         }
     }
 
-    clear() {
-        this.players.forEach((item) => {
+    clear(players) {
+        players.forEach((item) => {
             item.score = 0;
             item.win = false;
             item.div.firstElementChild.classList.remove("win-color");
